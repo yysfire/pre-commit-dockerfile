@@ -3,6 +3,7 @@ FROM python:2.7.18-slim-buster
 LABEL maintainer="yysfire <https://github.com/yysfire>"
 
 RUN apt-get update && apt-get install -y \
+    build-essential \
     patch \
     git && \
     apt-get clean && \
