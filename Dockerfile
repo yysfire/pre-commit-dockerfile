@@ -3,6 +3,7 @@ FROM python:2.7.18-slim-buster
 LABEL maintainer="yysfire <https://github.com/yysfire>"
 
 RUN apt-get update && apt-get install -y \
+    patch \
     git && \
     apt-get clean && \
     rm -rf /var/lib/apt
@@ -13,7 +14,7 @@ WORKDIR /project
 
 COPY pre-commit.patch /project/pre-commit.patch
 
-RUN cd /usr/lib/python2.7/site-packages/pre_commit && patch -i /project/pre-commit.patch -p0 && rm -f /project/pre-commit.patch
+RUN cd /usr/local/lib/python2.7/site-packages/pre_commit && patch -i /project/pre-commit.patch -p0 && rm -f /project/pre-commit.patch
 
 COPY .pre-commit-config_python2.yaml /project/.pre-commit-config.yaml
 
