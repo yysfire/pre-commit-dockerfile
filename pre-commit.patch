@@ -1,0 +1,10 @@
+--- languages/python.py.orig	2021-07-02 12:42:51.901581292 +0800
++++ languages/python.py	2021-07-02 12:42:09.560914585 +0800
+@@ -168,6 +168,7 @@
+                 python = os.path.realpath(sys.executable)
+             _make_venv(env_dir, python)
+             with in_env(prefix, version):
++                helpers.run_setup_cmd(prefix, ('pip', 'install', 'ruamel.yaml.clib==0.2.2'))
+                 helpers.run_setup_cmd(
+                     prefix, ('pip', 'install', '.') + additional_dependencies,
+                 )

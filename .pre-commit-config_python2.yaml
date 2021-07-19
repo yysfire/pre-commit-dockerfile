@@ -1,0 +1,67 @@
+default_language_version:
+    python: python2.7
+
+repos:
+-   repo: https://github.com/asottile/seed-isort-config
+    rev: v1.9.4
+    hooks:
+    -   id: seed-isort-config
+        args:
+        - --exclude=(tests/|third/)
+        - --application-directories=".:src"
+-   repo: https://github.com/pre-commit/mirrors-isort
+    rev: v4.3.21
+    hooks:
+    -   id: isort
+
+# Either isort&seed-isort-config or reorder_python_imports
+-   repo: https://github.com/asottile/reorder_python_imports
+    rev: v1.9.0
+    hooks:
+    -   id: reorder-python-imports
+        args:
+        - --py26-plus
+        - --separate-relative
+        - --application-directories=.:src
+
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v1.27.0
+    hooks:
+    -   id: pyupgrade
+        args:
+        - --keep-percent-format
+-   repo: https://github.com/asottile/add-trailing-comma
+    rev: v1.5.0
+    hooks:
+    -   id: add-trailing-comma
+-   repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: v1.5.3
+    hooks:
+    -   id: autopep8
+        args:
+        - --in-place
+        - --aggressive
+        - --aggressive
+        - --ignore=E114,E115,E116,E133,E203,E401,E501,E701,W292
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+    - id: check-added-large-files
+      args:
+      - --maxkb=512
+    - id: check-docstring-first
+    - id: check-json
+    - id: check-merge-conflict
+    - id: mixed-line-ending
+      args:
+      - --fix=lf
+    - id: end-of-file-fixer
+    - id: no-commit-to-branch
+      args: [--pattern, ^\d+\.\d+\.\d+-dev$, --pattern, ^\d+\.\d+\.\d+$]
+-   repo: https://github.com/PyCQA/flake8
+    rev: 3.9.0
+    hooks:
+    -   id: flake8
+        exclude: migrations
+        args:
+            - --ignore=W503,W504,E123,E127,E203,E225,E241,E261,E265,E303,E501,F403,F405,C901
